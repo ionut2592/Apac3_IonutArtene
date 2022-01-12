@@ -36,15 +36,13 @@
         create-drop : Crea TOT i en acabar esborra tot
         validate:comprova que tot fa MATCH-->
         
-        <!--Mapeig fora de la clase
-        <mapping esource="Pelicula.hbm.xml"/>
-        -->
-        <!-- Mapeig dinds de la clase-->    
+        
+        <!-- Mapeig dins de la clase-->    
         
         <mapping class="Model.Ciclista"/>
         <mapping class="Model.Etapa"/>
         <mapping class="Model.Mallot"/>
-        <!-- <mapping class="Model.Portar"/> -->
+        <!--<mapping class="Model.Portar"/> -->
 
 
 

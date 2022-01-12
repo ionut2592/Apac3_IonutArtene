@@ -1,16 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,11 +15,12 @@ import javax.persistence.Table;
  * @author ionut
  */
 @Entity
-@Table(name = "etapes")
+@Table(name = "etapes",catalog = "ciclisme")
 public class Etapa {
 
     @Id
-    @Column(name = "numero")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="numero")
     private Long numero;
 
     @Column(name = "kms")
@@ -34,19 +32,19 @@ public class Etapa {
     @Column(name = "arribada")
     private String arribada;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dorsal")
-    private Set<Ciclista> elsciclistes;
+    private Ciclista elciclista;
 
     public Etapa() {
     }
 
-    public Etapa(Long numero, int kms, String eixida, String arribada, Set<Ciclista> elsciclistes) {
+    public Etapa(Long numero, int kms, String eixida, String arribada, Ciclista elciclista) {
         this.numero = numero;
         this.kms = kms;
         this.eixida = eixida;
         this.arribada = arribada;
-        this.elsciclistes = elsciclistes;
+        this.elciclista = elciclista;
     }
 
     public Long getNumero() {
@@ -81,12 +79,12 @@ public class Etapa {
         this.arribada = arribada;
     }
 
-    public Set<Ciclista> getElsciclistes() {
-        return elsciclistes;
+    public Ciclista getElciclista() {
+        return elciclista;
     }
 
-    public void setElsciclistes(Set<Ciclista> elsciclistes) {
-        this.elsciclistes = elsciclistes;
+    public void setElciclista(Ciclista elciclista) {
+        this.elciclista = elciclista;
     }
 
     @Override
@@ -94,7 +92,4 @@ public class Etapa {
         return "Etapa{" + "numero=" + numero + ", kms=" + kms + ", eixida=" + eixida + ", arribada=" + arribada + '}';
     }
 
-    public void addCiclicsta(Ciclista c) {
-        this.elsciclistes.add(c);
-    }
 }

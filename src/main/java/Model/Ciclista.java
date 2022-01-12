@@ -1,12 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  * @author ionut
  */
 @Entity
-@Table(name = "ciclistes")
+@Table(name = "ciclistes", catalog = "ciclisme")
 public class Ciclista {
 
     @Id
@@ -27,6 +28,10 @@ public class Ciclista {
     @Column(name = "edat")
     private int edat;
 
+    @OneToMany(mappedBy = "elciclista", cascade = CascadeType.ALL)
+    @ElementCollection(targetClass=Etapa.class)
+    private Set<Etapa> ganador;
+
     public Ciclista() {
     }
 
@@ -34,6 +39,7 @@ public class Ciclista {
         this.dorsal = dorsal;
         this.nom = nom;
         this.edat = edat;
+        // this.ganador = new HashSet<>();
     }
 
     public Long getDorsal() {
@@ -60,6 +66,13 @@ public class Ciclista {
         this.edat = edat;
     }
 
+//    public Set<Etapa> getGanador() {
+//        return ganador;
+//    }
+//
+//    public void addGanador(Etapa ganada) {
+//        this.ganador.add(ganada);
+//    }
     @Override
     public String toString() {
         return "Ciclista{" + "dorsal=" + dorsal + ", nom=" + nom + ", edat=" + edat + '}';

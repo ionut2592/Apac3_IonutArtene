@@ -1,0 +1,7 @@
+help=Opcion Actual.Muestra la ayuda del programa
+show [-c] table=Muestra el contenido de una tabla
+add table=Añadira un nuevo registro a la tabla
+update table=Actualizara una tabla
+delete table=Borrara un registro de una tabla
+clear=Limpiara la pantalla
+quit/salir=Acaba el programa
