@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,13 +10,13 @@ import javax.persistence.Table;
  *
  * @author ionut
  */
-@Entity
+@Entity(name="mallots")
 @Table(name = "mallots",catalog = "ciclisme")
-public class Mallot {
+public class Mallot implements Serializable{
 
     @Id
     @Column(name = "codi")
-    private Long codi;
+    private String codi;
 
     @Column(name = "tipus")
     private String tipus;
@@ -29,18 +30,18 @@ public class Mallot {
     public Mallot() {
     }
 
-    public Mallot(Long codi, String tipus, String color, int premi) {
+    public Mallot(String codi, String tipus, String color, int premi) {
         this.codi = codi;
         this.tipus = tipus;
         this.color = color;
         this.premi = premi;
     }
 
-    public Long getCodi() {
+    public String getCodi() {
         return codi;
     }
 
-    public void setCodi(Long codi) {
+    public void setCodi(String codi) {
         this.codi = codi;
     }
 

@@ -64,9 +64,9 @@ public class Main {
 
                                 Query e = laSessio.createQuery("from etapes");
                                 //Recuperamos todas las estapas
-                                List<Etapa> elsetapes = e.list();
+                                List<Etapa> etapes = e.list();
 
-                                for (Etapa etapa : elsetapes) {
+                                for (Etapa etapa : etapes) {
                                     System.out.println(e);
                                 }
                                 laSessio.getTransaction().commit();

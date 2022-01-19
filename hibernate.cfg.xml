@@ -42,7 +42,7 @@
         <mapping class="Model.Ciclista"/>
         <mapping class="Model.Etapa"/>
         <mapping class="Model.Mallot"/>
-        <!--<mapping class="Model.Portar"/> -->
+        <mapping class="Model.Portar"/> 
 
 
 

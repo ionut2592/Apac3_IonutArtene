@@ -1,35 +1,38 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  *
  * @author ionut
  */
-@Entity
+@Entity(name="portar")
 @Table(name = "portar", catalog = "ciclisme")
-public class Portar {
+public class Portar implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
     
-    @Column
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dorsal")
     private Ciclista ciclista;
     
-    @Column
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "numero")
     private Etapa etapa;
     
-    @Column
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codi")
     private Mallot mallot;
 
@@ -41,13 +44,7 @@ public class Portar {
         this.id = id;
     }
 
-    public Ciclista getElciclista() {
-        return ciclista;
-    }
-
-    public void setElciclista(Ciclista elciclista) {
-        this.ciclista = elciclista;
-    }
+  
 
     public Etapa getEtapa() {
         return etapa;
@@ -57,13 +54,23 @@ public class Portar {
         this.etapa = etapa;
     }
 
-    public Mallot getElmallot() {
+    public Mallot getMallot() {
         return mallot;
     }
 
-    public void setElmallot(Mallot elmallot) {
-        this.mallot = elmallot;
+    public void setMallot(Mallot mallot) {
+        this.mallot = mallot;
     }
+
+    public Ciclista getCiclista() {
+        return ciclista;
+    }
+
+    public void setCiclista(Ciclista ciclista) {
+        this.ciclista = ciclista;
+    }
+
+    
 
     public Portar() {
     }

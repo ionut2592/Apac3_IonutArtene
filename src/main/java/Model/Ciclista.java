@@ -1,10 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -14,9 +14,9 @@ import javax.persistence.Table;
  *
  * @author ionut
  */
-@Entity
+@Entity(name = "ciclistes")
 @Table(name = "ciclistes", catalog = "ciclisme")
-public class Ciclista {
+public class Ciclista implements Serializable {
 
     @Id
     @Column(name = "dorsal")
@@ -28,9 +28,11 @@ public class Ciclista {
     @Column(name = "edat")
     private int edat;
 
-    @OneToMany(mappedBy = "elciclista", cascade = CascadeType.ALL)
-    @ElementCollection(targetClass=Etapa.class)
+    @OneToMany(mappedBy = "elciclista", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Etapa> ganador;
+
+    @OneToMany(mappedBy = "mallot",cascade=CascadeType.ALL)
+    private Set<Portar> elsmallots;
 
     public Ciclista() {
     }
@@ -39,7 +41,7 @@ public class Ciclista {
         this.dorsal = dorsal;
         this.nom = nom;
         this.edat = edat;
-        // this.ganador = new HashSet<>();
+        this.ganador = new HashSet<>();
     }
 
     public Long getDorsal() {
@@ -66,13 +68,25 @@ public class Ciclista {
         this.edat = edat;
     }
 
-//    public Set<Etapa> getGanador() {
-//        return ganador;
-//    }
-//
-//    public void addGanador(Etapa ganada) {
-//        this.ganador.add(ganada);
-//    }
+    public Set<Etapa> getGanador() {
+        return ganador;
+    }
+
+    public void addGanador(Etapa ganada) {
+        this.ganador.add(ganada);
+    }
+
+    public Set<Portar> getElsmallots() {
+        return elsmallots;
+    }
+
+    public void setElsmallots(Set<Portar> elsmallots) {
+        this.elsmallots = elsmallots;
+    }
+
+    
+    
+
     @Override
     public String toString() {
         return "Ciclista{" + "dorsal=" + dorsal + ", nom=" + nom + ", edat=" + edat + '}';

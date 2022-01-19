@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +15,9 @@ import javax.persistence.Table;
  *
  * @author ionut
  */
-@Entity
+@Entity(name="etapes")
 @Table(name = "etapes",catalog = "ciclisme")
-public class Etapa {
+public class Etapa implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,7 +90,9 @@ public class Etapa {
 
     @Override
     public String toString() {
-        return "Etapa{" + "numero=" + numero + ", kms=" + kms + ", eixida=" + eixida + ", arribada=" + arribada + '}';
+        return "Etapa{" + "numero=" + numero + ", kms=" + kms + ", eixida=" + eixida + ", arribada=" + arribada + ", elciclista=" + elciclista + '}';
     }
+
+    
 
 }
