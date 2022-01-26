@@ -2,12 +2,7 @@ drop database if exists ciclisme;
 create database ciclisme;
 use ciclisme;
 
-drop table if exists equips;
-create table equips
-( nom VARCHAR (25) NOT NULL,
-  director VARCHAR (50),
-  PRIMARY KEY (nom)
-) engine=innodb;
+
 
 
 drop table if exists ciclistes;
@@ -15,9 +10,7 @@ create table ciclistes
 ( dorsal INT (4) AUTO_INCREMENT,
   nom VARCHAR (30) NOT NULL,
   edat INT (3),
-  equip VARCHAR (25),
-  PRIMARY KEY (dorsal),
- FOREIGN KEY (equip) references equips (nom)
+  PRIMARY KEY (dorsal)
 ) engine=innodb;
 
 
@@ -46,19 +39,6 @@ create table mallots
 
 
 
-drop table if exists ports;
-create table ports
-(  nom VARCHAR (35) NOT NULL,
-   altura INT(4),
-   categoria VARCHAR (1),
-   pendent FLOAT(3,2),
-   etapa INT (3),
-   ciclista INT (4),
-   PRIMARY KEY (nom),
-  FOREIGN KEY (ciclista) references ciclistes (dorsal),
-  FOREIGN KEY (etapa) references etapes (numero)
-) engine=innodb;
-
 
 
 drop table if exists portar;
@@ -75,130 +55,109 @@ create table portar
 
 
 
-insert into equips values('Amore Vita','Ricardo Padacci');
-insert into equips values('Artiach','Jose Perez');
-insert into equips values('Banesto','Miguel Echevarria');
-insert into equips values('Bresciali-Refin','Pietro Armani'); 
-insert into equips values('Carrera','Luigi Petroni');
-insert into equips values('Castorama','Jean Philip');
-insert into equips values('Euskadi','Pedro Txucaru'); 
-insert into equips values('Gatorade','Gian Luca Pacceli');
-insert into equips values('Gewiss','Moreno Argentin');
-insert into equips values('Jolly Club','Johan Richard'); 
-insert into equips values('Kelme','Alvaro Pino'); 
-insert into equips values('Lotus Festina','Suarez Cuevas');
-insert into equips values('Mapei-Clas','Juan Fernandez');
-insert into equips values('Mercatone Uno','Ettore Romano'); 
-insert into equips values('Motorola','John Fidwell');
-insert into equips values('Navigare','Lonrenzo Sciacci'); 
-insert into equips values('ONCE','Manuel Sainz'); 
-insert into equips values('PDM','Piet Van Der Kruis');
-insert into equips values('Seguros Amaya','Minguez'); 
-insert into equips values('Telecom','Morgan Reikcard'); 
-insert into equips values('TVM','Steveens Henk');
-insert into equips values('Wordperfect','Bill Gates');
+
  
 
-insert into ciclistes (dorsal,edat,nom,equip) values(1,32,'Miguel Indurain','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(2,35,'Pedro Delgado','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(3,27,'Alex Zulle','ONCE');
-insert into ciclistes (dorsal,edat,nom,equip) values(4,30,'Tony Rominger','Mapei-Clas');
-insert into ciclistes (dorsal,edat,nom,equip) values(5,32,'Gert-Jan Theunisse','TVM');
-insert into ciclistes (dorsal,edat,nom,equip) values(6,33,'Adriano Baffi','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(7,30,'Massimiliano Lelli','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(8,33,'Jean Van Poppel','Lotus Festina');
-insert into ciclistes (dorsal,edat,nom,equip) values(9,34,'Massimo Podenzana','Navigare');
-insert into ciclistes (dorsal,edat,nom,equip) values(10,28,'Mario Cipollini','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(11,31,'Flavio Giupponi','Bresciali-Refin');
-insert into ciclistes (dorsal,edat,nom,equip) values(12,31,'Alessio Di Basco','Amore Vita');
-insert into ciclistes (dorsal,edat,nom,equip) values(13,28,'Lale Cubino','Seguros Amaya');
-insert into ciclistes (dorsal,edat,nom,equip) values(14,33,'Roberto Pagnin','Navigare');
-insert into ciclistes (dorsal,edat,nom,equip) values(15,31,'Jesper Skibby','TVM');
-insert into ciclistes (dorsal,edat,nom,equip) values(16,29,'Dimitri Konishev','Jolly Club');
-insert into ciclistes (dorsal,edat,nom,equip) values(17,37,'Bruno Leali','Bresciali-Refin');
-insert into ciclistes (dorsal,edat,nom,equip) values(18,37,'Robert Millar','TVM');
-insert into ciclistes (dorsal,edat,nom,equip) values(19,34,'Julian Gorospe','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(20,29,'Alfonso Gutierrez','Artiach');
-insert into ciclistes (dorsal,edat,nom,equip) values(21,31,'Erwin Nijboer','Artiach');
-insert into ciclistes (dorsal,edat,nom,equip) values(22,32,'Giorgio Furlan','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(23,27,'Lance Armstrong','Motorola');
-insert into ciclistes (dorsal,edat,nom,equip) values(24,29,'Claudio Chiappucci','Carrera');
-insert into ciclistes (dorsal,edat,nom,equip) values(25,32,'Gianni Bugno','Gatorade');
-insert into ciclistes (dorsal,edat,nom,equip) values(26,27,'Mikel Zarrabeitia','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(27,28,'Laurent Jalabert','ONCE');
-insert into ciclistes (dorsal,edat,nom,equip) values(28,33,'Jesus Montoya','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(29,28,'Angel Edo','Kelme');
-insert into ciclistes (dorsal,edat,nom,equip) values(30,28,'Melchor Mauri','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(31,30,'Vicente Aparicio','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(32,28,'Laurent Dufaux','ONCE');
-insert into ciclistes (dorsal,edat,nom,equip) values(33,29,'Stefano della Santa','Mapei-Clas');
-insert into ciclistes (dorsal,edat,nom,equip) values(34,30,'Angel Yesid Camargo','Kelme');
-insert into ciclistes (dorsal,edat,nom,equip) values(35,28,'Erik Dekker','Wordperfect');
-insert into ciclistes (dorsal,edat,nom,equip) values(36,32,'Gian Matteo Fagnini','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(37,29,'Scott Sunderland','TVM');
-insert into ciclistes (dorsal,edat,nom,equip) values(38,25,'Javier Palacin','Euskadi');
-insert into ciclistes (dorsal,edat,nom,equip) values(39,30,'Rudy Verdonck','Lotus Festina');
-insert into ciclistes (dorsal,edat,nom,equip) values(40,32,'Viatceslav Ekimov','Wordperfect');
-insert into ciclistes (dorsal,edat,nom,equip) values(41,25,'Rolf Aldag','Telecom');
-insert into ciclistes (dorsal,edat,nom,equip) values(42,29,'Davide Cassani','TVM');
-insert into ciclistes (dorsal,edat,nom,equip) values(43,28,'Francesco Casagrande','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(44,27,'Luca Gelfi','Gatorade');
-insert into ciclistes (dorsal,edat,nom,equip) values(45,26,'Alberto Elli','Artiach');
-insert into ciclistes (dorsal,edat,nom,equip) values(46,24,'Agustin Sagasti','Euskadi');
-insert into ciclistes (dorsal,edat,nom,equip) values(47,32,'Laurent Pillon','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(48,29,'Marco Saligari','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(49,23,'Eugeni Berzin','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(50,27,'Fernando Escartin','Mapei-Clas');
-insert into ciclistes (dorsal,edat,nom,equip) values(51,30,'Udo Bolts','Telecom');
-insert into ciclistes (dorsal,edat,nom,equip) values(52,26,'Vladislav Bobrik','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(53,28,'Michele Bartoli','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(54,30,'Steffen Wesemann','Telecom');
-insert into ciclistes (dorsal,edat,nom,equip) values(55,28,'Nicola Minali','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(56,29,'Andrew Hampsten','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(57,28,'Stefano Zanini','Navigare');
-insert into ciclistes (dorsal,edat,nom,equip) values(58,34,'Gerd Audehm','Telecom');
-insert into ciclistes (dorsal,edat,nom,equip) values(59,28,'Mariano Picolli','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(60,28,'Giovanni Lombardi','Bresciali-Refin');
-insert into ciclistes (dorsal,edat,nom,equip) values(61,26,'Walte Castignola','Navigare');
-insert into ciclistes (dorsal,edat,nom,equip) values(62,30,'Raul Alcala','Motorola');
-insert into ciclistes (dorsal,edat,nom,equip) values(63,32,'Alvaro Mejia','Motorola');
-insert into ciclistes (dorsal,edat,nom,equip) values(64,28,'Giuseppe Petito','Mercatone Uno');
-insert into ciclistes (dorsal,edat,nom,equip) values(65,29,'Pascal Lino','Amore Vita');
-insert into ciclistes (dorsal,edat,nom,equip) values(66,24,'Enrico Zaina','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(67,28,'Armand de las Cuevas','Castorama');
-insert into ciclistes (dorsal,edat,nom,equip) values(68,28,'Angel Citracca','Navigare');
-insert into ciclistes (dorsal,edat,nom,equip) values(69,27,'Eddy Seigneur','Castorama');
-insert into ciclistes (dorsal,edat,nom,equip) values(70,29,'Sandro Heulot','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(71,27,'Prudencio Indurain','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(72,28,'Stefano Colage','Bresciali-Refin');
-insert into ciclistes (dorsal,edat,nom,equip) values(73,35,'Laurent Fignon','Gatorade');
-insert into ciclistes (dorsal,edat,nom,equip) values(74,36,'Claudio Chioccioli','Amore Vita');
-insert into ciclistes (dorsal,edat,nom,equip) values(75,32,'Juan Romero','Seguros Amaya');
-insert into ciclistes (dorsal,edat,nom,equip) values(76,34,'Marco Giovannetti','Gatorade');
-insert into ciclistes (dorsal,edat,nom,equip) values(77,33,'Javier Mauleon','Mapei-Clas');
-insert into ciclistes (dorsal,edat,nom,equip) values(78,35,'Antonio Esparza','Kelme');
-insert into ciclistes (dorsal,edat,nom,equip) values(79,33,'Johan Bruyneel','ONCE');
-insert into ciclistes (dorsal,edat,nom,equip) values(80,37,'Federico Echave','Mapei-Clas');
-insert into ciclistes (dorsal,edat,nom,equip) values(81,33,'Piotr Ugrumov','Gewiss');
-insert into ciclistes (dorsal,edat,nom,equip) values(82,30,'Edgar Corredor','Kelme');
-insert into ciclistes (dorsal,edat,nom,equip) values(83,32,'Hernan Buenahora','Kelme');
-insert into ciclistes (dorsal,edat,nom,equip) values(84,31,'Jon Unzaga','Mapei-Clas');
-insert into ciclistes (dorsal,edat,nom,equip) values(85,30,'Dimitri Abdoujaparov','Carrera');
-insert into ciclistes (dorsal,edat,nom,equip) values(86,32,'Juan Martinez Oliver','Kelme');
-insert into ciclistes (dorsal,edat,nom,equip) values(87,32,'Fernando Mota','Artiach');
-insert into ciclistes (dorsal,edat,nom,equip) values(88,28,'Angel Camarillo','Mapei-Clas');
-insert into ciclistes (dorsal,edat,nom,equip) values(89,36,'Stefan Roche','Carrera');
-insert into ciclistes (dorsal,edat,nom,equip) values(90,27,'Ivan Ivanov','Artiach');
-insert into ciclistes (dorsal,edat,nom,equip) values(91,28,'Nestor Mora','Kelme');
-insert into ciclistes (dorsal,edat,nom,equip) values(92,27,'Federico Garcia','Artiach');
-insert into ciclistes (dorsal,edat,nom,equip) values(93,29,'Bo Hamburger','TVM');
-insert into ciclistes (dorsal,edat,nom,equip) values(94,30,'Marino Alonso','Banesto');
-insert into ciclistes (dorsal,edat,nom,equip) values(95,31,'Manuel Guijarro','Lotus Festina');
-insert into ciclistes (dorsal,edat,nom,equip) values(96,29,'Tom Cordes','Wordperfect');
-insert into ciclistes (dorsal,edat,nom,equip) values(97,28,'Casimiro Moreda','ONCE');
-insert into ciclistes (dorsal,edat,nom,equip) values(98,25,'Eleuterio Anguita','Artiach');
-insert into ciclistes (dorsal,edat,nom,equip) values(99,29,'Per Pedersen','Seguros Amaya');
-insert into ciclistes (dorsal,edat,nom,equip) values(100,30,'William Palacios','Jolly Club');
+insert into ciclistes (dorsal,edat,nom) values(1,32,'Miguel Indurain');
+insert into ciclistes (dorsal,edat,nom) values(2,35,'Pedro Delgado');
+insert into ciclistes (dorsal,edat,nom) values(3,27,'Alex Zulle');
+insert into ciclistes (dorsal,edat,nom) values(4,30,'Tony Rominger');
+insert into ciclistes (dorsal,edat,nom) values(5,32,'Gert-Jan Theunisse');
+insert into ciclistes (dorsal,edat,nom) values(6,33,'Adriano Baffi');
+insert into ciclistes (dorsal,edat,nom) values(7,30,'Massimiliano Lelli');
+insert into ciclistes (dorsal,edat,nom) values(8,33,'Jean Van Poppel');
+insert into ciclistes (dorsal,edat,nom) values(9,34,'Massimo Podenzana');
+insert into ciclistes (dorsal,edat,nom) values(10,28,'Mario Cipollini');
+insert into ciclistes (dorsal,edat,nom) values(11,31,'Flavio Giupponi');
+insert into ciclistes (dorsal,edat,nom) values(12,31,'Alessio Di Basco');
+insert into ciclistes (dorsal,edat,nom) values(13,28,'Lale Cubino');
+insert into ciclistes (dorsal,edat,nom) values(14,33,'Roberto Pagnin');
+insert into ciclistes (dorsal,edat,nom) values(15,31,'Jesper Skibby');
+insert into ciclistes (dorsal,edat,nom) values(16,29,'Dimitri Konishev');
+insert into ciclistes (dorsal,edat,nom) values(17,37,'Bruno Leali');
+insert into ciclistes (dorsal,edat,nom) values(18,37,'Robert Millar');
+insert into ciclistes (dorsal,edat,nom) values(19,34,'Julian Gorospe');
+insert into ciclistes (dorsal,edat,nom) values(20,29,'Alfonso Gutierrez');
+insert into ciclistes (dorsal,edat,nom) values(21,31,'Erwin Nijboer');
+insert into ciclistes (dorsal,edat,nom) values(22,32,'Giorgio Furlan');
+insert into ciclistes (dorsal,edat,nom) values(23,27,'Lance Armstrong');
+insert into ciclistes (dorsal,edat,nom) values(24,29,'Claudio Chiappucci');
+insert into ciclistes (dorsal,edat,nom) values(25,32,'Gianni Bugno');
+insert into ciclistes (dorsal,edat,nom) values(26,27,'Mikel Zarrabeitia');
+insert into ciclistes (dorsal,edat,nom) values(27,28,'Laurent Jalabert');
+insert into ciclistes (dorsal,edat,nom) values(28,33,'Jesus Montoya');
+insert into ciclistes (dorsal,edat,nom) values(29,28,'Angel Edo');
+insert into ciclistes (dorsal,edat,nom) values(30,28,'Melchor Mauri');
+insert into ciclistes (dorsal,edat,nom) values(31,30,'Vicente Aparicio');
+insert into ciclistes (dorsal,edat,nom) values(32,28,'Laurent Dufaux');
+insert into ciclistes (dorsal,edat,nom) values(33,29,'Stefano della Santa');
+insert into ciclistes (dorsal,edat,nom) values(34,30,'Angel Yesid Camargo');
+insert into ciclistes (dorsal,edat,nom) values(35,28,'Erik Dekker');
+insert into ciclistes (dorsal,edat,nom) values(36,32,'Gian Matteo Fagnini');
+insert into ciclistes (dorsal,edat,nom) values(37,29,'Scott Sunderland');
+insert into ciclistes (dorsal,edat,nom) values(38,25,'Javier Palacin');
+insert into ciclistes (dorsal,edat,nom) values(39,30,'Rudy Verdonck');
+insert into ciclistes (dorsal,edat,nom) values(40,32,'Viatceslav Ekimov');
+insert into ciclistes (dorsal,edat,nom) values(41,25,'Rolf Aldag');
+insert into ciclistes (dorsal,edat,nom) values(42,29,'Davide Cassani');
+insert into ciclistes (dorsal,edat,nom) values(43,28,'Francesco Casagrande');
+insert into ciclistes (dorsal,edat,nom) values(44,27,'Luca Gelfi');
+insert into ciclistes (dorsal,edat,nom) values(45,26,'Alberto Elli');
+insert into ciclistes (dorsal,edat,nom) values(46,24,'Agustin Sagasti');
+insert into ciclistes (dorsal,edat,nom) values(47,32,'Laurent Pillon');
+insert into ciclistes (dorsal,edat,nom) values(48,29,'Marco Saligari');
+insert into ciclistes (dorsal,edat,nom) values(49,23,'Eugeni Berzin');
+insert into ciclistes (dorsal,edat,nom) values(50,27,'Fernando Escartin');
+insert into ciclistes (dorsal,edat,nom) values(51,30,'Udo Bolts');
+insert into ciclistes (dorsal,edat,nom) values(52,26,'Vladislav Bobrik');
+insert into ciclistes (dorsal,edat,nom) values(53,28,'Michele Bartoli');
+insert into ciclistes (dorsal,edat,nom) values(54,30,'Steffen Wesemann');
+insert into ciclistes (dorsal,edat,nom) values(55,28,'Nicola Minali');
+insert into ciclistes (dorsal,edat,nom) values(56,29,'Andrew Hampsten');
+insert into ciclistes (dorsal,edat,nom) values(57,28,'Stefano Zanini');
+insert into ciclistes (dorsal,edat,nom) values(58,34,'Gerd Audehm');
+insert into ciclistes (dorsal,edat,nom) values(59,28,'Mariano Picolli');
+insert into ciclistes (dorsal,edat,nom) values(60,28,'Giovanni Lombardi');
+insert into ciclistes (dorsal,edat,nom) values(61,26,'Walte Castignola');
+insert into ciclistes (dorsal,edat,nom) values(62,30,'Raul Alcala');
+insert into ciclistes (dorsal,edat,nom) values(63,32,'Alvaro Mejia');
+insert into ciclistes (dorsal,edat,nom) values(64,28,'Giuseppe Petito');
+insert into ciclistes (dorsal,edat,nom) values(65,29,'Pascal Lino');
+insert into ciclistes (dorsal,edat,nom) values(66,24,'Enrico Zaina');
+insert into ciclistes (dorsal,edat,nom) values(67,28,'Armand de las Cuevas');
+insert into ciclistes (dorsal,edat,nom) values(68,28,'Angel Citracca');
+insert into ciclistes (dorsal,edat,nom) values(69,27,'Eddy Seigneur');
+insert into ciclistes (dorsal,edat,nom) values(70,29,'Sandro Heulot');
+insert into ciclistes (dorsal,edat,nom) values(71,27,'Prudencio Indurain');
+insert into ciclistes (dorsal,edat,nom) values(72,28,'Stefano Colage');
+insert into ciclistes (dorsal,edat,nom) values(73,35,'Laurent Fignon');
+insert into ciclistes (dorsal,edat,nom) values(74,36,'Claudio Chioccioli');
+insert into ciclistes (dorsal,edat,nom) values(75,32,'Juan Romero');
+insert into ciclistes (dorsal,edat,nom) values(76,34,'Marco Giovannetti');
+insert into ciclistes (dorsal,edat,nom) values(77,33,'Javier Mauleon');
+insert into ciclistes (dorsal,edat,nom) values(78,35,'Antonio Esparza');
+insert into ciclistes (dorsal,edat,nom) values(79,33,'Johan Bruyneel');
+insert into ciclistes (dorsal,edat,nom) values(80,37,'Federico Echave');
+insert into ciclistes (dorsal,edat,nom) values(81,33,'Piotr Ugrumov');
+insert into ciclistes (dorsal,edat,nom) values(82,30,'Edgar Corredor');
+insert into ciclistes (dorsal,edat,nom) values(83,32,'Hernan Buenahora');
+insert into ciclistes (dorsal,edat,nom) values(84,31,'Jon Unzaga');
+insert into ciclistes (dorsal,edat,nom) values(85,30,'Dimitri Abdoujaparov');
+insert into ciclistes (dorsal,edat,nom) values(86,32,'Juan Martinez Oliver');
+insert into ciclistes (dorsal,edat,nom) values(87,32,'Fernando Mota');
+insert into ciclistes (dorsal,edat,nom) values(88,28,'Angel Camarillo');
+insert into ciclistes (dorsal,edat,nom) values(89,36,'Stefan Roche');
+insert into ciclistes (dorsal,edat,nom) values(90,27,'Ivan Ivanov');
+insert into ciclistes (dorsal,edat,nom) values(91,28,'Nestor Mora');
+insert into ciclistes (dorsal,edat,nom) values(92,27,'Federico Garcia');
+insert into ciclistes (dorsal,edat,nom) values(93,29,'Bo Hamburger');
+insert into ciclistes (dorsal,edat,nom) values(94,30,'Marino Alonso');
+insert into ciclistes (dorsal,edat,nom) values(95,31,'Manuel Guijarro');
+insert into ciclistes (dorsal,edat,nom) values(96,29,'Tom Cordes');
+insert into ciclistes (dorsal,edat,nom) values(97,28,'Casimiro Moreda');
+insert into ciclistes (dorsal,edat,nom) values(98,25,'Eleuterio Anguita');
+insert into ciclistes (dorsal,edat,nom) values(99,29,'Per Pedersen');
+insert into ciclistes (dorsal,edat,nom) values(100,30,'William Palacios');
 
 
 insert into etapes(kms,eixida,arribada,dorsal) values( 9,'Valladolid','Valladolid',1); 

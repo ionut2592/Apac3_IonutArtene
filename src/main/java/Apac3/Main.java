@@ -479,7 +479,7 @@ public class Main {
                         String[] numero_split = numero.split(",");
                         for (String n : numero_split) {
                             e = get_etapa(Long.valueOf(n));
-                            c = new Ciclista(200l, nom, edat);
+                            c = new Ciclista(nom, edat);
                             c.addEtapaGanada(e);
                         }
                     }
@@ -492,7 +492,7 @@ public class Main {
 
             }
         }
-        c = new Ciclista(200l, nom, edat);
+        c = new Ciclista(nom, edat);
         c.addEtapaGanada(e);
 
         return c;

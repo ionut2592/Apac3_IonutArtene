@@ -40,8 +40,8 @@ public class Ciclista implements Serializable {
     public Ciclista() {
     }
 
-    public Ciclista(Long dorsal, String nom, int edat) {
-        this.dorsal = dorsal;
+    public Ciclista(String nom, int edat) {
+
         this.nom = nom;
         this.edat = edat;
         this.ganador = new HashSet<>();
