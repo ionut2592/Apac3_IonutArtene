@@ -1,27 +1,30 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
  * @author ionut
  */
-@Entity(name="etapes")
-@Table(name = "etapes",catalog = "ciclisme")
-public class Etapa implements Serializable{
+@Entity(name = "etapes")
+@Table(name = "etapes", catalog = "ciclisme")
+public class Etapa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="numero")
+    @Column(name = "numero")
     private Long numero;
 
     @Column(name = "kms")
@@ -33,19 +36,18 @@ public class Etapa implements Serializable{
     @Column(name = "arribada")
     private String arribada;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "dorsal")
-    private Ciclista elciclista;
+    private Ciclista elciclista_ganador;
 
     public Etapa() {
     }
 
-    public Etapa(Long numero, int kms, String eixida, String arribada, Ciclista elciclista) {
-        this.numero = numero;
+    public Etapa(int kms, String eixida, String arribada) {
         this.kms = kms;
         this.eixida = eixida;
         this.arribada = arribada;
-        this.elciclista = elciclista;
+
     }
 
     public Long getNumero() {
@@ -78,21 +80,20 @@ public class Etapa implements Serializable{
 
     public void setArribada(String arribada) {
         this.arribada = arribada;
+
     }
 
-    public Ciclista getElciclista() {
-        return elciclista;
+    public Ciclista getElciclista_ganador() {
+        return elciclista_ganador;
     }
 
-    public void setElciclista(Ciclista elciclista) {
-        this.elciclista = elciclista;
+    public void setElciclista_ganador(Ciclista elciclista_ganador) {
+        this.elciclista_ganador = elciclista_ganador;
     }
 
     @Override
     public String toString() {
-        return "Etapa{" + "numero=" + numero + ", kms=" + kms + ", eixida=" + eixida + ", arribada=" + arribada + ", elciclista=" + elciclista + '}';
+        return "Etapa{" + "numero=" + numero + ", kms=" + kms + ", eixida=" + eixida + ", arribada=" + arribada + '}';
     }
-
-    
 
 }

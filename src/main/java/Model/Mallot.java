@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,9 +11,9 @@ import javax.persistence.Table;
  *
  * @author ionut
  */
-@Entity(name="mallots")
-@Table(name = "mallots",catalog = "ciclisme")
-public class Mallot implements Serializable{
+@Entity(name = "mallots")
+@Table(name = "mallots", catalog = "ciclisme")
+public class Mallot implements Serializable {
 
     @Id
     @Column(name = "codi")
@@ -26,6 +27,7 @@ public class Mallot implements Serializable{
 
     @Column(name = "premi")
     private int premi;
+
 
     public Mallot() {
     }
@@ -68,6 +70,23 @@ public class Mallot implements Serializable{
     public void setPremi(int premi) {
         this.premi = premi;
     }
+
+//    public Set<Ciclista> getCiclista() {
+//        return ciclista;
+//    }
+//
+//    public void setCiclista(Set<Ciclista> ciclista) {
+//        this.ciclista = ciclista;
+//    }
+//
+//    public Set<Etapa> getEtapas() {
+//        return etapas;
+//    }
+//
+//    public void setEtapas(Set<Etapa> etapas) {
+//        this.etapas = etapas;
+//    }
+//    
 
     @Override
     public String toString() {

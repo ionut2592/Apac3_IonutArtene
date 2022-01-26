@@ -12,7 +12,7 @@ create table equips
 
 drop table if exists ciclistes;
 create table ciclistes
-( dorsal INT (4) NOT NULL,
+( dorsal INT (4) AUTO_INCREMENT,
   nom VARCHAR (30) NOT NULL,
   edat INT (3),
   equip VARCHAR (25),
@@ -28,9 +28,9 @@ create table etapes
   kms INT (3),
   eixida VARCHAR (35),
   arribada VARCHAR (35),
-  ciclista INT (4),
+  dorsal INT (4),
     PRIMARY KEY (numero),
- FOREIGN KEY (ciclista) references ciclistes (dorsal)
+ FOREIGN KEY (dorsal) references ciclistes (dorsal)
 ) engine=innodb;
 
 
@@ -64,13 +64,13 @@ create table ports
 drop table if exists portar;
 create table portar
 ( id INT(4) AUTO_INCREMENT,
-  ciclista INT (4),
-  etapa INT (3) NOT NULL,
-  mallot VARCHAR (3) NOT NULL,
+  dorsal INT (4),
+  numero INT (3) NOT NULL,
+  codi VARCHAR (3) NOT NULL,
   PRIMARY KEY (id) ,
-  FOREIGN KEY (ciclista) references ciclistes (dorsal),
-  FOREIGN KEY (etapa) references etapes (numero),
-  FOREIGN KEY (mallot) references mallots (codi)
+  FOREIGN KEY (dorsal) references ciclistes (dorsal),
+  FOREIGN KEY (numero) references etapes (numero),
+  FOREIGN KEY (codi) references mallots (codi)
 ) engine=innodb;
 
 
@@ -201,27 +201,27 @@ insert into ciclistes (dorsal,edat,nom,equip) values(99,29,'Per Pedersen','Segur
 insert into ciclistes (dorsal,edat,nom,equip) values(100,30,'William Palacios','Jolly Club');
 
 
-insert into etapes(kms,eixida,arribada,ciclista) values( 9,'Valladolid','Valladolid',1); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 180,'Valladolid','Salamanca',36); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 240,'Salamanca','Caceres',12);
-insert into etapes(kms,eixida,arribada,ciclista) values( 230,'Almendralejo','Cordoba',83);
-insert into etapes(kms,eixida,arribada,ciclista) values( 170,'Cordoba','Granada',27); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 150,'Granada','Sierra Nevada',52); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 250,'Baza','Alicante',22); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 40,'Benidorm','Benidorm',1); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 150,'Benidorm','Valencia',35); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 200,'Igualada','Andorra',2); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 195,'Andorra','Estacion de Cerler',65); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 220,'Benasque','Zaragoza',12);
-insert into etapes(kms,eixida,arribada,ciclista) values( 200,'Zaragoza','Pamplona',93);
-insert into etapes(kms,eixida,arribada,ciclista) values( 172,'Pamplona','Alto de la Cruz de la Demanda',86);
-insert into etapes(kms,eixida,arribada,ciclista) values( 207,'Santo Domingo de la Calzada','Santander',10); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 160,'Santander','Lagos de Covadonga',5);
-insert into etapes(kms,eixida,arribada,ciclista) values( 140,'Cangas de Onis','Alto del Naranco',4); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 195,'Avila','Avila',8); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 190,'Avila','Destilerias Dyc',2);
-insert into etapes(kms,eixida,arribada,ciclista) values( 200, 'Segovia','Destilerias Dyc',2); 
-insert into etapes(kms,eixida,arribada,ciclista) values( 170,'Destilerias Dyc','Madrid',27);
+insert into etapes(kms,eixida,arribada,dorsal) values( 9,'Valladolid','Valladolid',1); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 180,'Valladolid','Salamanca',36); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 240,'Salamanca','Caceres',12);
+insert into etapes(kms,eixida,arribada,dorsal) values( 230,'Almendralejo','Cordoba',83);
+insert into etapes(kms,eixida,arribada,dorsal) values( 170,'Cordoba','Granada',27); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 150,'Granada','Sierra Nevada',52); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 250,'Baza','Alicante',22); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 40,'Benidorm','Benidorm',1); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 150,'Benidorm','Valencia',35); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 200,'Igualada','Andorra',2); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 195,'Andorra','Estacion de Cerler',65); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 220,'Benasque','Zaragoza',12);
+insert into etapes(kms,eixida,arribada,dorsal) values( 200,'Zaragoza','Pamplona',93);
+insert into etapes(kms,eixida,arribada,dorsal) values( 172,'Pamplona','Alto de la Cruz de la Demanda',86);
+insert into etapes(kms,eixida,arribada,dorsal) values( 207,'Santo Domingo de la Calzada','Santander',10); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 160,'Santander','Lagos de Covadonga',5);
+insert into etapes(kms,eixida,arribada,dorsal) values( 140,'Cangas de Onis','Alto del Naranco',4); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 195,'Avila','Avila',8); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 190,'Avila','Destilerias Dyc',2);
+insert into etapes(kms,eixida,arribada,dorsal) values( 200, 'Segovia','Destilerias Dyc',2); 
+insert into etapes(kms,eixida,arribada,dorsal) values( 170,'Destilerias Dyc','Madrid',27);
 
 
 
@@ -251,112 +251,112 @@ insert into ports values('Sierra Nevada',510,'E',6.0,2,26);
 
 
 
-insert into portar(ciclista,etapa,mallot) values(1,2,'MGE');
-insert into portar(ciclista,etapa,mallot) values(1,1,'MGE');
-insert into portar(ciclista,etapa,mallot) values(1,4,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(1,3,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(1,16,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(1,17,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(1,1,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values(1,18,'MGE');
-insert into portar(ciclista,etapa,mallot) values(1,19,'MGE');
-insert into portar(ciclista,etapa,mallot) values(1,1,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values(1,1,'MMO');
-insert into portar(ciclista,etapa,mallot) values(1,21,'MGE');
-insert into portar(ciclista,etapa,mallot) values(1,1,'MMV');
-insert into portar(ciclista,etapa,mallot) values(1,20,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(2,7,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(2,6,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(2,5,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(2,21,'MMO');
-insert into portar(ciclista,etapa,mallot) values(3,12,'MGE');
-insert into portar(ciclista,etapa,mallot) values(3,11,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(4,8,'MGE'); 
-insert into portar(ciclista,etapa,mallot) values(8,2,'MSE');
-insert into portar(ciclista,etapa,mallot) values( 8,4,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 10,18,'MSE');
-insert into portar(ciclista,etapa,mallot) values( 12,5,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 12,3,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 12,6,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 16,2,'MMV'); 
-insert into portar(ciclista,etapa,mallot) values( 16,6,'MMV'); 
-insert into portar(ciclista,etapa,mallot) values( 16,3,'MMV'); 
-insert into portar(ciclista,etapa,mallot) values( 16,5,'MMV'); 
-insert into portar(ciclista,etapa,mallot) values( 17,4,'MMV'); 
-insert into portar(ciclista,etapa,mallot) values( 20,17,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,21,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,19,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,11,'MRE');
-insert into portar(ciclista,etapa,mallot) values( 20,8,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,18,'MMV'); 
-insert into portar(ciclista,etapa,mallot) values( 20,12,'MRE');
-insert into portar(ciclista,etapa,mallot) values( 20,9,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,13,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,6,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,20,'MRE');
-insert into portar(ciclista,etapa,mallot) values( 20,14,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,10,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,7,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,16,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 20,15,'MRE'); 
-insert into portar(ciclista,etapa,mallot) values( 22,20,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 22,16,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 22,21,'MSE');
-insert into portar(ciclista,etapa,mallot) values( 22,15,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 22,19,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 22,14,'MSE'); 
-insert into portar(ciclista,etapa,mallot) values( 22,17,'MSE');
-insert into portar(ciclista,etapa,mallot) values( 24,4,'MMO'); 
-insert into portar(ciclista,etapa,mallot) values( 25,5,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 25,3,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 25,2,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 26,8,'MMO');
-insert into portar(ciclista,etapa,mallot)  values( 26,10,'MGE'); 
-insert into portar(ciclista,etapa,mallot)  values( 26,18,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 26,7,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 26,9,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 26,9,'MGE'); 
-insert into portar(ciclista,etapa,mallot)  values( 26,6,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 27,5,'MRE');
-insert into portar(ciclista,etapa,mallot)  values( 27,4,'MRE'); 
-insert into portar(ciclista,etapa,mallot)  values( 27,3,'MRE'); 
-insert into portar(ciclista,etapa,mallot)  values( 27,2,'MRE'); 
-insert into portar(ciclista,etapa,mallot)  values( 27,18,'MRE'); 
-insert into portar(ciclista,etapa,mallot)  values( 28,15,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 28,16,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 28,17,'MMO');
-insert into portar(ciclista,etapa,mallot)  values( 28,19,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 28,20,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 28,14,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 30,13,'MGE'); 
-insert into portar(ciclista,etapa,mallot)  values( 30,15,'MGE'); 
-insert into portar(ciclista,etapa,mallot)  values( 30,14,'MGE');
-insert into portar(ciclista,etapa,mallot)  values( 30,13,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 30,12,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 30,11,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 30,10,'MMO'); 
-insert into portar(ciclista,etapa,mallot)  values( 33,8,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 33,7,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 42,21,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 42,20,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 42,19,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 42,17,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 42,16,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 42,15,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 42,14,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 48,13,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 48,12,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 48,9,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 48,11,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 48,10,'MMV'); 
-insert into portar(ciclista,etapa,mallot)  values( 67,3,'MMS');
-insert into portar(ciclista,etapa,mallot)  values( 67,1,'MMS');
-insert into portar(ciclista,etapa,mallot)  values( 69,2,'MMS');
-insert into portar(ciclista,etapa,mallot)  values( 69,4,'MMS'); 
-insert into portar(ciclista,etapa,mallot)  values( 99,10,'MSE'); 
-insert into portar(ciclista,etapa,mallot)  values( 99,8,'MSE');
-insert into portar(ciclista,etapa,mallot)  values( 99,12,'MSE'); 
-insert into portar(ciclista,etapa,mallot)  values( 99,7,'MSE'); 
-insert into portar(ciclista,etapa,mallot)  values( 99,11,'MSE');
-insert into portar(ciclista,etapa,mallot)  values( 99,9,'MSE'); 
-insert into portar(ciclista,etapa,mallot)  values( 99,13,'MSE');
+insert into portar(dorsal,numero,codi) values(1,2,'MGE');
+insert into portar(dorsal,numero,codi) values(1,1,'MGE');
+insert into portar(dorsal,numero,codi) values(1,4,'MGE'); 
+insert into portar(dorsal,numero,codi) values(1,3,'MGE'); 
+insert into portar(dorsal,numero,codi) values(1,16,'MGE'); 
+insert into portar(dorsal,numero,codi) values(1,17,'MGE'); 
+insert into portar(dorsal,numero,codi) values(1,1,'MSE'); 
+insert into portar(dorsal,numero,codi) values(1,18,'MGE');
+insert into portar(dorsal,numero,codi) values(1,19,'MGE');
+insert into portar(dorsal,numero,codi) values(1,1,'MRE'); 
+insert into portar(dorsal,numero,codi) values(1,1,'MMO');
+insert into portar(dorsal,numero,codi) values(1,21,'MGE');
+insert into portar(dorsal,numero,codi) values(1,1,'MMV');
+insert into portar(dorsal,numero,codi) values(1,20,'MGE'); 
+insert into portar(dorsal,numero,codi) values(2,7,'MGE'); 
+insert into portar(dorsal,numero,codi) values(2,6,'MGE'); 
+insert into portar(dorsal,numero,codi) values(2,5,'MGE'); 
+insert into portar(dorsal,numero,codi) values(2,21,'MMO');
+insert into portar(dorsal,numero,codi) values(3,12,'MGE');
+insert into portar(dorsal,numero,codi) values(3,11,'MGE'); 
+insert into portar(dorsal,numero,codi) values(4,8,'MGE'); 
+insert into portar(dorsal,numero,codi) values(8,2,'MSE');
+insert into portar(dorsal,numero,codi) values( 8,4,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 10,18,'MSE');
+insert into portar(dorsal,numero,codi) values( 12,5,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 12,3,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 12,6,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 16,2,'MMV'); 
+insert into portar(dorsal,numero,codi) values( 16,6,'MMV'); 
+insert into portar(dorsal,numero,codi) values( 16,3,'MMV'); 
+insert into portar(dorsal,numero,codi) values( 16,5,'MMV'); 
+insert into portar(dorsal,numero,codi) values( 17,4,'MMV'); 
+insert into portar(dorsal,numero,codi) values( 20,17,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,21,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,19,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,11,'MRE');
+insert into portar(dorsal,numero,codi) values( 20,8,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,18,'MMV'); 
+insert into portar(dorsal,numero,codi) values( 20,12,'MRE');
+insert into portar(dorsal,numero,codi) values( 20,9,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,13,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,6,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,20,'MRE');
+insert into portar(dorsal,numero,codi) values( 20,14,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,10,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,7,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,16,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 20,15,'MRE'); 
+insert into portar(dorsal,numero,codi) values( 22,20,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 22,16,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 22,21,'MSE');
+insert into portar(dorsal,numero,codi) values( 22,15,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 22,19,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 22,14,'MSE'); 
+insert into portar(dorsal,numero,codi) values( 22,17,'MSE');
+insert into portar(dorsal,numero,codi) values( 24,4,'MMO'); 
+insert into portar(dorsal,numero,codi) values( 25,5,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 25,3,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 25,2,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 26,8,'MMO');
+insert into portar(dorsal,numero,codi)  values( 26,10,'MGE'); 
+insert into portar(dorsal,numero,codi)  values( 26,18,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 26,7,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 26,9,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 26,9,'MGE'); 
+insert into portar(dorsal,numero,codi)  values( 26,6,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 27,5,'MRE');
+insert into portar(dorsal,numero,codi)  values( 27,4,'MRE'); 
+insert into portar(dorsal,numero,codi)  values( 27,3,'MRE'); 
+insert into portar(dorsal,numero,codi)  values( 27,2,'MRE'); 
+insert into portar(dorsal,numero,codi)  values( 27,18,'MRE'); 
+insert into portar(dorsal,numero,codi)  values( 28,15,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 28,16,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 28,17,'MMO');
+insert into portar(dorsal,numero,codi)  values( 28,19,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 28,20,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 28,14,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 30,13,'MGE'); 
+insert into portar(dorsal,numero,codi)  values( 30,15,'MGE'); 
+insert into portar(dorsal,numero,codi)  values( 30,14,'MGE');
+insert into portar(dorsal,numero,codi)  values( 30,13,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 30,12,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 30,11,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 30,10,'MMO'); 
+insert into portar(dorsal,numero,codi)  values( 33,8,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 33,7,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 42,21,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 42,20,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 42,19,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 42,17,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 42,16,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 42,15,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 42,14,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 48,13,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 48,12,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 48,9,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 48,11,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 48,10,'MMV'); 
+insert into portar(dorsal,numero,codi)  values( 67,3,'MMS');
+insert into portar(dorsal,numero,codi)  values( 67,1,'MMS');
+insert into portar(dorsal,numero,codi)  values( 69,2,'MMS');
+insert into portar(dorsal,numero,codi)  values( 69,4,'MMS'); 
+insert into portar(dorsal,numero,codi)  values( 99,10,'MSE'); 
+insert into portar(dorsal,numero,codi)  values( 99,8,'MSE');
+insert into portar(dorsal,numero,codi)  values( 99,12,'MSE'); 
+insert into portar(dorsal,numero,codi)  values( 99,7,'MSE'); 
+insert into portar(dorsal,numero,codi)  values( 99,11,'MSE');
+insert into portar(dorsal,numero,codi)  values( 99,9,'MSE'); 
+insert into portar(dorsal,numero,codi)  values( 99,13,'MSE');

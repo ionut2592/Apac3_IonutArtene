@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  * @author ionut
  */
-@Entity(name="portar")
+@Entity(name = "portar")
 @Table(name = "portar", catalog = "ciclisme")
 public class Portar implements Serializable {
 
@@ -23,15 +23,15 @@ public class Portar implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dorsal")
     private Ciclista ciclista;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "numero")
     private Etapa etapa;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codi")
     private Mallot mallot;
@@ -44,14 +44,13 @@ public class Portar implements Serializable {
         this.id = id;
     }
 
-  
-
     public Etapa getEtapa() {
         return etapa;
     }
 
     public void setEtapa(Etapa etapa) {
         this.etapa = etapa;
+
     }
 
     public Mallot getMallot() {
@@ -69,8 +68,6 @@ public class Portar implements Serializable {
     public void setCiclista(Ciclista ciclista) {
         this.ciclista = ciclista;
     }
-
-    
 
     public Portar() {
     }

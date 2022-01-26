@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 public class Ciclista implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dorsal")
     private Long dorsal;
 
@@ -28,10 +31,10 @@ public class Ciclista implements Serializable {
     @Column(name = "edat")
     private int edat;
 
-    @OneToMany(mappedBy = "elciclista", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "elciclista_ganador", cascade = CascadeType.ALL)
     private Set<Etapa> ganador;
 
-    @OneToMany(mappedBy = "mallot",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "ciclista", cascade = CascadeType.ALL)
     private Set<Portar> elsmallots;
 
     public Ciclista() {
@@ -72,8 +75,14 @@ public class Ciclista implements Serializable {
         return ganador;
     }
 
-    public void addGanador(Etapa ganada) {
-        this.ganador.add(ganada);
+    public void setGanador(Set<Etapa> ganador) {
+        this.ganador = ganador;
+    }
+
+    public void addEtapaGanada(Etapa e) {
+
+        this.ganador.add(e);
+
     }
 
     public Set<Portar> getElsmallots() {
@@ -83,9 +92,6 @@ public class Ciclista implements Serializable {
     public void setElsmallots(Set<Portar> elsmallots) {
         this.elsmallots = elsmallots;
     }
-
-    
-    
 
     @Override
     public String toString() {
