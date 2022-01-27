@@ -23,14 +23,14 @@ create table etapes
   arribada VARCHAR (35),
   dorsal INT (4),
     PRIMARY KEY (numero),
- FOREIGN KEY (dorsal) references ciclistes (dorsal)
+  FOREIGN KEY (dorsal) references ciclistes (dorsal) on delete set null
 ) engine=innodb;
 
 
 
 drop table if exists mallots;
 create table mallots
-( codi VARCHAR (3) NOT NULL,
+( codi VARCHAR (3) ,
   tipus VARCHAR (30),
   color VARCHAR (20),
   premi INT(10),
@@ -45,12 +45,12 @@ drop table if exists portar;
 create table portar
 ( id INT(4) AUTO_INCREMENT,
   dorsal INT (4),
-  numero INT (3) NOT NULL,
-  codi VARCHAR (3) NOT NULL,
+  numero INT (3) ,
+  codi VARCHAR (3) ,
   PRIMARY KEY (id) ,
-  FOREIGN KEY (dorsal) references ciclistes (dorsal),
-  FOREIGN KEY (numero) references etapes (numero),
-  FOREIGN KEY (codi) references mallots (codi)
+  FOREIGN KEY (dorsal) references ciclistes (dorsal) on delete cascade,
+  FOREIGN KEY (numero) references etapes (numero) on delete cascade ,
+  FOREIGN KEY (codi) references mallots (codi) on delete cascade
 ) engine=innodb;
 
 
@@ -190,24 +190,6 @@ insert into mallots values('MMS','Mas Sufrido','estrellas moradas',2000000);
 insert into mallots values('MMV','Metas volantes','rojo',2000000);
 insert into mallots values('MRE','Regularidad','verde',2000000);
 insert into mallots values('MSE','Sprints especiales','rosa',2000000);
-
-
-
-insert into ports values('Alto del Naranco',510,'1',6.90,10,30);
-insert into ports values('Arcalis',510,'E',6.5,10,4);
-insert into ports values('Cerler-Circo de Ampriu',510,'E',5.8,11,9);
-insert into ports values('Coll de la Comella',510,'1',8.7,10,2);
-insert into ports values('Coll de Ordino',510,'E',5.3,10,7);
-insert into ports values('Cruz de la Demanda',510,'E',7.0,11,20);
-insert into ports values('Lagos de Covadonga',510,'E',6.8,16,42);
-insert into ports values('Navacerrada',510,'1',7.5,19,2);
-insert into ports values('Puerto de Alisas',510,'1',5.8,15,1);
-insert into ports values('Puerto de la Morcuera',510,'2',6.5,19,2);
-insert into ports values('Puerto de Mijares',510,'1',4.9,18,24);
-insert into ports values('Puerto de Navalmoral',510,'2',4.3,18,2);
-insert into ports values('Puerto de Pedro Bernardo',510,'1',4.2,18,25);
-insert into ports values('Sierra Nevada',510,'E',6.0,2,26);
-
 
 
 insert into portar(dorsal,numero,codi) values(1,2,'MGE');

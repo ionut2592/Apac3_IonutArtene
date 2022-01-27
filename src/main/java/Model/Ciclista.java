@@ -31,10 +31,10 @@ public class Ciclista implements Serializable {
     @Column(name = "edat")
     private int edat;
 
-    @OneToMany(mappedBy = "elciclista_ganador", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "elciclista_ganador", cascade = CascadeType.PERSIST)
     private Set<Etapa> ganador;
 
-    @OneToMany(mappedBy = "ciclista", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ciclista", cascade = CascadeType.PERSIST)
     private Set<Portar> elsmallots;
 
     public Ciclista() {

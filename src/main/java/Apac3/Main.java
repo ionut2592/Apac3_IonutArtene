@@ -36,7 +36,7 @@ public class Main {
         String opcion = "";
 
         do {
-            opcion = Leer.leerTexto("DDBB Management> ");
+            opcion = Leer.leerTexto(ConsoleColors.PURPLE + "DDBB Management> " + ConsoleColors.RESET);
             if (opcion.equals("quit") || opcion.equals("salir")) {
                 System.out.println("Usted ha elegido la opcion de salir");
                 break;
@@ -59,7 +59,7 @@ public class Main {
                                 show_mallot();
                                 break;
                             default:
-                                System.out.println("La tabla introducida no es corecta");
+                                System.out.println(ConsoleColors.RED + "La tabla introducida no es corecta" + ConsoleColors.RESET);
                                 break;
 
                         }
@@ -74,11 +74,11 @@ public class Main {
 
                                 break;
                             case "mallot":
-                                System.out.println("Esta tabla no tiene la opcion \"-c\" .");
+                                System.out.println(ConsoleColors.RED + "Esta tabla no tiene la opcion \"-c\" ." + ConsoleColors.RESET);
                                 break;
 
                             default:
-                                System.out.println("La tabla introducida no es corecta");
+                                System.out.println(ConsoleColors.RED + "La tabla introducida no es corecta" + ConsoleColors.RESET);
                                 break;
 
                         }
@@ -99,7 +99,7 @@ public class Main {
                             add_mallot();
                             break;
                         default:
-                            System.out.println("La tabla introducida no es corecta");
+                            System.out.println(ConsoleColors.RED + "La tabla introducida no es corecta" + ConsoleColors.RESET);
                             break;
 
                     }
@@ -120,7 +120,7 @@ public class Main {
 
                             break;
                         default:
-                            System.out.println("La tabla introducida no es corecta");
+                            System.out.println(ConsoleColors.RED + "La tabla introducida no es corecta" + ConsoleColors.RESET);
 
                     }
                     break;
@@ -284,7 +284,7 @@ public class Main {
 
         Query c = laSessio.createQuery("from ciclistes");
         c.setMaxResults(20);
-        c.setFirstResult(1);
+        c.setFirstResult(0);
         //Recuperamos todos los ciclistas
         List<Ciclista> elsciclistes = c.list();
         System.out.println(String.format("%-15s %-30s %-15s",
@@ -331,7 +331,7 @@ public class Main {
 
         Query e = laSessio.createQuery("from etapes");
         e.setMaxResults(20);
-        e.setFirstResult(1);
+        e.setFirstResult(0);
         //Recuperamos todas las estapas
         List<Etapa> etapes = e.list();
         System.out.println(String.format("%-15s %-15s %-30s %-15s",
@@ -373,7 +373,7 @@ public class Main {
 
         Query m = laSessio.createQuery("from mallots");
         m.setMaxResults(20);
-        m.setFirstResult(1);
+        m.setFirstResult(0);
         //Recuperamos todos los mallots
         List<Mallot> elsmallos = m.list();
         System.out.println(String.format("%-15s %-20s %-20s %-15s",
@@ -397,67 +397,62 @@ public class Main {
 
     public static void actualizar_ciclista() {
         show_ciclista("");
-        int n_ciclcista = Leer.leerEntero("Elige uno de los anteriores ciclista para actualizar : ");
+        int n_ciclcista = Leer.leerEntero(ConsoleColors.BLUE + "Elige uno de los anteriores ciclista para actualizar : " + ConsoleColors.RESET);
         Ciclista c = get_ciclista(Long.valueOf(n_ciclcista));
 
-        System.out.println("Actualizando ciclista: Vamos a actualizar sus datos . Intro para no modificar y escribir nuevos datos en caso de que sean incorrectos ");
-        String nom = Leer.leerTexto("Actualizando ciclista :Quieres cambiar el nombre del ciclista : \" nombre <-> " + c.getNom() + "\" :");
-        int edat = Leer.leerEntero("Actualizando ciclista :Quieres cambiar la edad del ciclista :\" edad <-> " + c.getEdat() + "\" :");
+        System.out.println(ConsoleColors.BLUE + "Actualizando ciclista: Vamos a actualizar sus datos . Intro para no modificar y escribir nuevos datos en caso de que sean incorrectos " + ConsoleColors.RESET);
+        String nom = Leer.leerTexto(ConsoleColors.BLUE + "Actualizando ciclista :Quieres cambiar el nombre del ciclista : \" nombre <-> " + c.getNom() + "\" :" + ConsoleColors.RESET);
+        c.setNom(nom.isBlank() ? c.getNom() : nom);
+        int edat = Leer.leerEntero(ConsoleColors.BLUE + "Actualizando ciclista :Quieres cambiar la edad del ciclista :\" edad <-> " + c.getEdat() + "\" :" + ConsoleColors.RESET);
+        c.setEdat(edat == 0 ? c.getEdat() : edat);
 
-        if (!nom.isBlank() && edat != 0) {
-            c.setNom(nom);
-            c.setEdat(edat);
-            actualizarElement(c);
-        }
+        actualizarElement(c);
+
     }
 
     public static void actualizar_etapa() {
         show_etapa("");
 
-        int n_etapa = Leer.leerEntero("Elige una de los anteriores etapas para actualizar : ");
+        int n_etapa = Leer.leerEntero(ConsoleColors.BLUE + "Elige una de los anteriores etapas para actualizar : ");
         Etapa e = get_etapa(Long.valueOf(n_etapa));
-        System.out.println("Actualizando etapa: Vamos a actualizar sus datos . Intro para no modificar y escribir nuevos datos en caso de que querer modificarlos ");
-        int kms = Leer.leerEntero("Actualizando etapa : Quieres cambiar los kms de la etapa : \"kms<->" + e.getKms() + "\" :");
-        String salida = Leer.leerTexto("Actualizando etapa : Quieres cambiar la salida de la etapa : \" salida <-> " + e.getEixida() + "\" :");
-        String llegada = Leer.leerTexto("Actualizando etapa : Quieres cambiar la llegada de la etapa : \" llegada <-> " + e.getArribada() + "\" :");
-        String elec = Leer.leerTexto("Actualizando etapa : Quieres cambiar el ganador de la etapa(s/n) : \" ganador <-> " + e.getElciclista_ganador().getDorsal() + " " + e.getElciclista_ganador().getNom() + "\" :");
+        System.out.println(ConsoleColors.BLUE + "Actualizando etapa: Vamos a actualizar sus datos . Intro para no modificar y escribir nuevos datos en caso de que querer modificarlos " + ConsoleColors.RESET);
+
+        int kms = Leer.leerEntero(ConsoleColors.BLUE + "Actualizando etapa : Quieres cambiar los kms de la etapa : \"kms<->" + e.getKms() + "\" :" + ConsoleColors.RESET);
+        e.setKms(kms == 0 ? e.getKms() : kms);
+        String salida = Leer.leerTexto(ConsoleColors.BLUE + "Actualizando etapa : Quieres cambiar la salida de la etapa : \" salida <-> " + e.getEixida() + "\" :" + ConsoleColors.RESET);
+        e.setEixida(salida.isBlank() ? e.getEixida() : salida);
+        String llegada = Leer.leerTexto(ConsoleColors.BLUE + "Actualizando etapa : Quieres cambiar la llegada de la etapa : \" llegada <-> " + e.getArribada() + "\" :" + ConsoleColors.RESET);
+        e.setArribada(llegada.isBlank() ? e.getArribada() : llegada);
+        String elec = Leer.leerTexto(ConsoleColors.BLUE + "Actualizando etapa : Quieres cambiar el ganador de la etapa(s/n) : \" ganador <-> " + e.getElciclista_ganador().getDorsal() + " " + e.getElciclista_ganador().getNom() + "\" :" + ConsoleColors.RESET);
         int id = 0;
         Ciclista c = null;
         if (elec.equals("s")) {
             show_ciclista("");
-            id = Leer.leerEntero("Actualizando etapa : Elige un ganador de la etapa  :");
+            id = Leer.leerEntero(ConsoleColors.BLUE + "Actualizando etapa : Elige un ganador de la etapa  :" + ConsoleColors.RESET);
             c = get_ciclista(Long.valueOf(id));
+            e.setElciclista_ganador(c);
+
         }
 
-        if (kms != 0 && !salida.isBlank() && !llegada.isBlank() && id != 0) {
-            e.setKms(kms);
-            e.setEixida(salida);
-            e.setArribada(llegada);
-            if (elec.equals("s")) {
-                e.setElciclista_ganador(c);
-            }
-
-            actualizarElement(e);
-        }
+        actualizarElement(e);
 
     }
 
     public static void actualizar_mallot() {
         show_mallot();
-        String n_mallot = Leer.leerTexto("Elige uno de los anteriores mallots para actualizar : ");
+        String n_mallot = Leer.leerTexto(ConsoleColors.BLUE + "Elige uno de los anteriores mallots para actualizar : " + ConsoleColors.RESET);
         Mallot m = get_mallot(n_mallot);
-        System.out.println("Actualizando mallot: Vamos a actualizar sus datos . Intro para no modificar y escribir nuevos datos en caso de que sean incorrectos ");
-        String tipo = Leer.leerTexto("Actualizando mallot : Quiere cambiar el tipo del mallot : \"tipo <-> " + m.getTipus() + "\" :");
-        String color = Leer.leerTexto("Actualizando mallot : Quiere cambiar el color del mallot : \"color <-> " + m.getColor() + "\" :");
-        int premi = Leer.leerEntero("Actualizando mallot : Quiere cambiar el premio del mallot : \"prmeio <-> " + m.getPremi() + "\" :");
-        if (!tipo.isBlank() && !color.isBlank() && premi != 0) {
+        System.out.println(ConsoleColors.BLUE + "Actualizando mallot: Vamos a actualizar sus datos . Intro para no modificar y escribir nuevos datos en caso de que sean incorrectos " + ConsoleColors.RESET);
 
-            m.setTipus(tipo);
-            m.setColor(color);
-            m.setPremi(premi);
+        String tipo = Leer.leerTexto(ConsoleColors.BLUE + "Actualizando mallot : Quiere cambiar el tipo del mallot : \"tipo <-> " + m.getTipus() + "\" :" + ConsoleColors.RESET);
+        m.setTipus(tipo.isBlank() ? m.getTipus() : tipo);
 
-            actualizarElement(m);
-        }
+        String color = Leer.leerTexto(ConsoleColors.BLUE + "Actualizando mallot : Quiere cambiar el color del mallot : \"color <-> " + m.getColor() + "\" :" + ConsoleColors.RESET);
+        m.setColor(tipo.isBlank() ? m.getColor() : color);
+        int premi = Leer.leerEntero(ConsoleColors.BLUE + "Actualizando mallot : Quiere cambiar el premio del mallot : \"prmeio <-> " + m.getPremi() + "\" :" + ConsoleColors.RESET);
+        m.setPremi(premi == 0 ? m.getPremi() : premi);
+
+        actualizarElement(m);
 
     }
 
@@ -465,15 +460,15 @@ public class Main {
         Ciclista c = null;
         Etapa e = null;
 
-        String nom = Leer.leerTexto("Add ciclista :Introduce el nombre del ciclista ");
-        int edat = Leer.leerEntero2("Add ciclista : Introduce la edad del ciclista :");
+        String nom = Leer.leerTexto(ConsoleColors.BLUE + "Add ciclista :Introduce el nombre del ciclista " + ConsoleColors.RESET);
+        int edat = Leer.leerEntero2(ConsoleColors.BLUE + "Add ciclista : Introduce la edad del ciclista :" + ConsoleColors.RESET);
         if (!var.equals("-1")) {
-            String elec = Leer.leerTexto("Add ciclista : Quieres añadir las etapas que ha ganado(s/n)  :");
+            String elec = Leer.leerTexto(ConsoleColors.BLUE + "Add ciclista : Quieres añadir las etapas que ha ganado(s/n)  :" + ConsoleColors.RESET);
             String numero = "";
 
             if (elec.equals("s")) {
                 show_etapa("");
-                numero = Leer.leerTexto("Add ciclista : Elige 1 o varias etapas (Si no existe inserte -1 para añadir una nueva) :");
+                numero = Leer.leerTexto(ConsoleColors.BLUE + "Add ciclista : Elige 1 o varias etapas (Si no existe inserte -1 para añadir una nueva) :" + ConsoleColors.RESET);
                 if (numero != "-1") {
                     if (numero.contains(",")) {
                         String[] numero_split = numero.split(",");
@@ -503,16 +498,16 @@ public class Main {
         int id = 0;
         Ciclista c = null;
 
-        int kms = Leer.leerEntero2("Add etapa : Introduce los kms de la etapa  :");
-        String salida = Leer.leerTexto("Add etapa : Introduce la salida de la etapa :");
-        String llegada = Leer.leerTexto("Add etapa : Introduce la llegada de la etapa :");
+        int kms = Leer.leerEntero2(ConsoleColors.BLUE + "Add etapa : Introduce los kms de la etapa  :" + ConsoleColors.RESET);
+        String salida = Leer.leerTexto(ConsoleColors.BLUE + "Add etapa : Introduce la salida de la etapa :" + ConsoleColors.RESET);
+        String llegada = Leer.leerTexto(ConsoleColors.BLUE + "Add etapa : Introduce la llegada de la etapa :" + ConsoleColors.RESET);
         if (!n.equals("-1")) {
 
-            String elec = Leer.leerTexto("Add etapa : Quieres añadir un ganador a la etapa(s/n)  :");
+            String elec = Leer.leerTexto(ConsoleColors.BLUE + "Add etapa : Quieres añadir un ganador a la etapa(s/n)  :" + ConsoleColors.RESET);
 
             if (elec.equals("s")) {
                 show_ciclista("");
-                id = Leer.leerEntero("Add etapa : Elige un ganador de la etapa (Si no existe inserte -1 para añadir uno nuevo) :");
+                id = Leer.leerEntero("Add etapa : Elige un ganador de la etapa (Si no existe inserte -1 para añadir uno nuevo) :" + ConsoleColors.RESET);
                 if (id != -1) {
                     c = get_ciclista(Long.valueOf(id));
                 } else {
@@ -528,22 +523,21 @@ public class Main {
 
     public static void add_mallot() {
         Mallot m;
-        System.out.println("Actualizando mallot: Vamos a actualizar sus datos . Intro para no modificar y escribir nuevos datos en caso de que sean incorrectos ");
         String codi = "";
         String tipo = "";
         String color = "";
         int premi = 0;
-        while (codi.length() > 3) {
-            codi = Leer.leerTexto("Add mallot : Indique el codigo del mallot(Maximo 3 caracteres):");
+        while (codi.length() > 3 || codi.isBlank()) {
+            codi = Leer.leerTexto(ConsoleColors.BLUE + "Add mallot : Indique el codigo del mallot(Maximo 3 caracteres):" + ConsoleColors.RESET);
         }
         while (tipo.isBlank()) {
-            tipo = Leer.leerTexto("Add mallot : Indique el tipo del mallot (Ej:montanya,sprint,general) :");
+            tipo = Leer.leerTexto(ConsoleColors.BLUE + "Add mallot : Indique el tipo del mallot (Ej:montanya,sprint,general) :" + ConsoleColors.RESET);
         }
         while (color.isBlank()) {
-            color = Leer.leerTexto("Add mallot : Indique el color del mallot:");
+            color = Leer.leerTexto(ConsoleColors.BLUE + "Add mallot : Indique el color del mallot:" + ConsoleColors.RESET);
         }
         while (premi == 0) {
-            premi = Leer.leerEntero("Add mallot : Indique el premio del mallot  :");
+            premi = Leer.leerEntero(ConsoleColors.BLUE + "Add mallot : Indique el premio del mallot  :" + ConsoleColors.RESET);
         }
         m = new Mallot(codi, tipo, color, premi);
         guardarElement(m);
@@ -552,7 +546,7 @@ public class Main {
 
     public static void delete_ciclista() {
         show_ciclista("");
-        String n = Leer.leerTexto("Delete ciclista : Elige 1 o varios ciclistas  :");
+        String n = Leer.leerTexto(ConsoleColors.RED + "Delete ciclista : Elige 1 o varios ciclistas (separados por coma)  :" + ConsoleColors.RESET);
         Ciclista c;
         if (n.contains(",")) {
             String[] n_split = n.split(",");
@@ -572,7 +566,7 @@ public class Main {
 
     public static void delete_etapa() {
         show_etapa("");
-        String n = Leer.leerTexto("Delete etapa : Elige 1 o varias etapas  :");
+        String n = Leer.leerTexto(ConsoleColors.RED + "Delete etapa : Elige 1 o varias etapas (separadas por coma)  :" + ConsoleColors.RESET);
         Etapa e;
         if (n.contains(",")) {
             String[] n_split = n.split(",");
@@ -592,7 +586,7 @@ public class Main {
 
     public static void delete_mallot() {
         show_mallot();
-        String n = Leer.leerTexto("Delete mallot : Elige 1 o varios mallots  :");
+        String n = Leer.leerTexto(ConsoleColors.RED + "Delete mallot : Elige 1 o varios mallots (separados por coma)   :" + ConsoleColors.RESET);
         Mallot m;
         if (n.contains(",")) {
             String[] n_split = n.split(",");
@@ -653,9 +647,11 @@ public class Main {
         //Recuperamos todas las estapas
         List<Etapa> etapes = e.list();
         for (Etapa etapa : etapes) {
-            Ciclista a = etapa.getElciclista_ganador();
-            a.addEtapaGanada(etapa);
-            System.out.println("");
+            if (etapa.getElciclista_ganador() != null) {
+                Ciclista a = etapa.getElciclista_ganador();
+                a.addEtapaGanada(etapa);
+            }
+
         }
         laSessio.getTransaction().commit();
     }

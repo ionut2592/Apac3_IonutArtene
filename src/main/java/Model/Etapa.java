@@ -36,7 +36,7 @@ public class Etapa implements Serializable {
     @Column(name = "arribada")
     private String arribada;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "dorsal")
     private Ciclista elciclista_ganador;
 
